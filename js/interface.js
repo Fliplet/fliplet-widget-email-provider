@@ -65,8 +65,6 @@ Fliplet().then(function () {
       }
     });
 
-    console.log(JSON.stringify(data, null, 2));
-
     Fliplet.Widget.save(data).then(function () {
       Fliplet.Widget.complete();
     });
