@@ -1,23 +1,4 @@
 Fliplet().then(function () {
-  var multipleFields = ['to', 'cc', 'bcc', 'replyTo'];
-  var data = _.omit(Fliplet.Widget.getData(), ['id', 'uuid']);
-  var $textarea = $('textarea');
-
-  multipleFields.forEach(function (name) {
-    var value = data[name];
-    if (Array.isArray(value) && value.length) {
-      $('[name="' + name + '"]').val(value.map(function (val) {
-        if (val.name && val.name !== val.email) {
-          return val.name + ' <' + val.email + '>';
-        }
-
-        return val.email;
-      }).join(', ')).closest('.form-group').removeClass('hidden');
-
-      $('[data-display="' + name + '"]').remove();
-    }
-  });
-
   function multiple(value) {
     return _.compact(value.split(',').map(function (val) {
       var pieces = val.trim().match(/(.+)<(.+)>/);
@@ -44,10 +25,39 @@ Fliplet().then(function () {
     }));
   }
 
+  function checkMultipleFieldToggles() {
+    if (!$('.data-display [data-display]').length) {
+      $('.data-display').remove();
+      Fliplet.Widget.autosize();
+    }
+  }
+
+  var multipleFields = ['to', 'cc', 'bcc', 'replyTo'];
+  var data = _.omit(Fliplet.Widget.getData(), ['id', 'uuid']);
+  var $textarea = $('textarea');
+
+  multipleFields.forEach(function (name) {
+    var value = data[name];
+    if (Array.isArray(value) && value.length) {
+      $('[name="' + name + '"]').val(value.map(function (val) {
+        if (val.name && val.name !== val.email) {
+          return val.name + ' <' + val.email + '>';
+        }
+
+        return val.email;
+      }).join(', ')).closest('.form-group').removeClass('hidden');
+
+      $('[data-display="' + name + '"]').remove();
+    }
+  });
+  checkMultipleFieldToggles();
+
   $('[data-display]').click(function (event) {
     event.preventDefault();
     $('input[name="' + $(this).data('display') + '"]').closest('.form-group').removeClass('hidden');
     $(this).remove();
+    checkMultipleFieldToggles();
+    Fliplet.Widget.autosize();
   });
 
   $('form').submit(function (event) {
@@ -70,7 +80,7 @@ Fliplet().then(function () {
     });
   });
 
-
+  $(window).on('resize', Fliplet.Widget.autosize);
 
   Fliplet.Widget.onSaveRequest(function () {
     $('form').submit();
@@ -79,7 +89,7 @@ Fliplet().then(function () {
   $textarea.tinymce({
     theme: 'modern',
     plugins: [
-      'advlist lists link image charmap hr',
+      'link image charmap hr',
       'searchreplace insertdatetime table textcolor colorpicker code'
     ],
     menubar: false,
@@ -90,7 +100,7 @@ Fliplet().then(function () {
     toolbar: [
       'formatselect | fontselect fontsizeselect | bold italic underline strikethrough |',
       'alignleft aligncenter alignright alignjustify | link | bullist numlist outdent indent |',
-      'blockquote subscript superscript | table charmap hr | removeformat | code'
+      'blockquote subscript superscript | table hr | removeformat | code'
     ].join(' '),
     setup: function (ed) {
       ed.on('keyup paste', function(e) {
