@@ -40,6 +40,7 @@ Fliplet.Widget.open('com.fliplet.email-provider', {
 
 ### 1. As a data source hook
 
+```js
 Fliplet.DataSources.update(1, {
   hooks: [{
     runOn: ["insert", "update"],
@@ -47,7 +48,10 @@ Fliplet.DataSources.update(1, {
     payload: result
   }]
 });
+```
 
 ### 2. As a template for `fliplet-communicate`
 
+```
 Fliplet.Communicate.sendEmail(result);
+```
