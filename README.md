@@ -10,6 +10,7 @@ Fliplet.Widget.open('com.fliplet.email-provider', {
 }).then(function (results) {
 
 });
+```
 
 ## Sample of results
 
