@@ -95,8 +95,8 @@ Fliplet().then(function () {
       'blockquote subscript superscript | table charmap hr | removeformat | code'
     ].join(' '),
     setup: function (ed) {
-      ed.on('blur', function(e) {
-        // checkContent('Body', ed.getContent());
+      ed.on('keyup paste', function(e) {
+        data.body = ed.getContent();
       });
     }
   });
