@@ -50,7 +50,11 @@ Fliplet.DataSources.update(1, {
 });
 ```
 
-### 2. As a template for `fliplet-communicate`
+### 2. As a data source validation template
+
+@seromenho to provide details.
+
+### 3. As a template for `fliplet-communicate`
 
 ```
 Fliplet.Communicate.sendEmail(result);
