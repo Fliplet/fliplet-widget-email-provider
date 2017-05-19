@@ -94,7 +94,7 @@ Fliplet().then(function () {
     ].join(' '),
     setup: function (ed) {
       ed.on('keyup paste', function(e) {
-        data.body = ed.getContent();
+        data.html = ed.getContent();
       });
     }
   });

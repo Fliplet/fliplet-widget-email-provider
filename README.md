@@ -1,23 +1,23 @@
 # Email provider
 
-## Usage
+## Provider usage
 
 ```js
 Fliplet.Widget.open('com.fliplet.email-provider', {
   data: {
     subject: 'Hello world'
   }
-}).then(function (results) {
+}).then(function (result) {
 
 });
 ```
 
-## Sample of results
+## Sample result
 
 ```json
 {
   "subject": "Hi {{name}}",
-  "body": "<p>Hi {{name}}, how are you?</p>",
+  "html": "<p>Hi {{name}}, how are you?</p>",
   "to": [
     {
       "email": "alice@example.org",
@@ -33,3 +33,21 @@ Fliplet.Widget.open('com.fliplet.email-provider', {
   ]
 }
 ```
+
+---
+
+## Using the provider result
+
+### 1. As a data source hook
+
+Fliplet.DataSources.update(1, {
+  hooks: [{
+    runOn: ["insert", "update"],
+    type: "email",
+    payload: result
+  }]
+});
+
+### 2. As a template for `fliplet-communicate`
+
+Fliplet.Communicate.sendEmail(result);
