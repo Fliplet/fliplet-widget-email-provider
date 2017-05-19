@@ -1,6 +1,6 @@
 {
-  "name": "widget-email-provider",
-  "package": "widget-email-provider",
+  "name": "Email provider",
+  "package": "com.fliplet.email-provider",
   "version": "1.0.0",
   "icon": "img/icon.png",
   "tags": ["type:component", "category:general"],
