@@ -1,5 +1,5 @@
 Fliplet().then(function () {
-  function multiple(value) {
+  function multiple(type, value) {
     return _.compact(value.split(',').map(function (val) {
       var pieces = val.trim().match(/(.+)<(.+)>/);
       if (!pieces) {
@@ -14,6 +14,7 @@ Fliplet().then(function () {
       }
 
       var person = {
+        type: type,
         email: email
       };
 
@@ -32,29 +33,39 @@ Fliplet().then(function () {
     }
   }
 
-  var multipleFields = ['to', 'cc', 'bcc', 'replyTo'];
+  var multipleFields = ['to', 'cc', 'bcc'];
   var data = _.omit(Fliplet.Widget.getData(), ['id', 'uuid']);
   var $textarea = $('textarea');
 
+  function showGroup($el) {
+    $el.closest('.form-group').removeClass('hidden');
+  }
+
   multipleFields.forEach(function (name) {
-    var value = data[name];
+    var value = _.filter(data.to, { type: name });
     if (Array.isArray(value) && value.length) {
-      $('[name="' + name + '"]').val(value.map(function (val) {
+      showGroup($('[name="' + name + '"]').val(value.map(function (val) {
         if (val.name && val.name !== val.email) {
           return val.name + ' <' + val.email + '>';
         }
 
         return val.email;
-      }).join(', ')).closest('.form-group').removeClass('hidden');
+      }).join(', ')));
 
       $('[data-display="' + name + '"]').remove();
     }
   });
+
   checkMultipleFieldToggles();
+
+  if (data.headers && data.headers['Reply-To']) {
+   showGroup($('[name="replyTo"]').val(data.headers['Reply-To']));
+   $('[data-display="replyTo"]').hide();
+  }
 
   $('[data-display]').click(function (event) {
     event.preventDefault();
-    $('input[name="' + $(this).data('display') + '"]').closest('.form-group').removeClass('hidden');
+    showGroup($('input[name="' + $(this).data('display') + '"]'));
     $(this).remove();
     checkMultipleFieldToggles();
     Fliplet.Widget.autosize();
@@ -63,17 +74,20 @@ Fliplet().then(function () {
   $('form').submit(function (event) {
     event.preventDefault();
 
-    data.subject = $('[name="subject"]').val(),
+    data.headers = data.headers || {};
+    data.to = [];
+    data.subject = $('[name="subject"]').val();
 
     multipleFields.forEach(function (name) {
-      var value = multiple($('[name="' + name + '"]').val());
-
-      if (value.length) {
-        data[name] = value;
-      } else if (data[name]) {
-        delete data[name];
-      }
+      multiple(name, $('[name="' + name + '"]').val()).forEach(function (email) {
+        data.to.push(email);
+      });
     });
+
+    var replyTo = $('[name="replyTo"]').val();
+    if (replyTo) {
+      data.headers['Reply-To'] = replyTo;
+    }
 
     Fliplet.Widget.save(data).then(function () {
       Fliplet.Widget.complete();
