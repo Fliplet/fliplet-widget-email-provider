@@ -89,8 +89,6 @@ Fliplet().then(function () {
       data.headers['Reply-To'] = replyTo;
     }
 
-    console.log(JSON.stringify(data, null, 2));
-
     Fliplet.Widget.save(data).then(function () {
       Fliplet.Widget.complete();
     });
