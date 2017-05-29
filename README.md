@@ -54,7 +54,7 @@ Fliplet.DataSources.update(1, {
 
 ```js
 Fliplet.DataSources.update(1, {
-  definition: [{
+  definition: {
     validtion: {
       email: {
         template: result,
@@ -62,7 +62,7 @@ Fliplet.DataSources.update(1, {
         ..
       }
     }
-  }]
+  }
 });
 ```
 
