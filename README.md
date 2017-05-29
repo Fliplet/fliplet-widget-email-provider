@@ -52,7 +52,19 @@ Fliplet.DataSources.update(1, {
 
 ### 2. As a data source validation template
 
-@seromenho to provide details.
+```js
+Fliplet.DataSources.update(1, {
+  definition: [{
+    validtion: {
+      email: {
+        template: result,
+        ..,
+        ..
+      }
+    }
+  }]
+});
+```
 
 ### 3. As a template for `fliplet-communicate`
 
