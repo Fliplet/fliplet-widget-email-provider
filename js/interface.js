@@ -37,6 +37,13 @@ Fliplet().then(function () {
   var data = _.omit(Fliplet.Widget.getData(), ['id', 'uuid']);
   var $textarea = $('textarea');
 
+  // Show usage and available variables to use on template
+  if (data.options && data.options.variables) {
+    var tpl = Fliplet.Widget.Templates['templates.usage'];
+    var htmlUsage = tpl(data.options.variables);
+    $('.usage').html(htmlUsage);
+  }
+
   function showGroup($el) {
     $el.closest('.form-group').removeClass('hidden');
   }
@@ -88,6 +95,9 @@ Fliplet().then(function () {
     if (replyTo) {
       data.headers['Reply-To'] = replyTo;
     }
+
+    // Don't pass back the options
+    delete data.options;
 
     Fliplet.Widget.save(data).then(function () {
       Fliplet.Widget.complete();
