@@ -9,6 +9,7 @@
   "html_tag": "div",
   "interface": {
     "dependencies": [
+      "handlebars",
       "lodash",
       "fliplet-core",
       "fliplet-studio-ui",
