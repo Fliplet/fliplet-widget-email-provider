@@ -9,6 +9,7 @@
   "html_tag": "div",
   "interface": {
     "dependencies": [
+      "handlebars",
       "lodash",
       "fliplet-core",
       "fliplet-studio-ui",
@@ -16,7 +17,8 @@
     ],
     "assets": [
       "css/interface.css",
-      "js/interface.js"
+      "js/interface.js",
+      "js/interface.templates.js"
     ]
   },
   "build": {
