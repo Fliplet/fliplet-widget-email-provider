@@ -5,67 +5,87 @@
       <a id="help_tip" href="#">Need help?</a>
     </header>
 
-    <div class="form-group clearfix">
-      <div class="col-sm-4 control-label">
-        <label for="to">To</label>
-      </div>
-      <div class="col-sm-8">
-        <input type="text" name="to" class="form-control" id="to" placeholder="Separate multiple email addresses with commas" required />
-        <div class="data-display">
-          Add:
-          <a href="#" data-display="cc">CC</a>
-          <a href="#" data-display="bcc">BCC</a>
-          <a href="#" data-display="replyTo">Reply-To</a>
+    {{#unless options.hideTo}}
+      <div class="form-group clearfix">
+        <div class="col-sm-4 control-label">
+          <label for="to">To</label>
+        </div>
+        <div class="col-sm-8">
+          <input type="text" name="to" class="form-control" id="to" placeholder="Separate multiple email addresses with commas" required />
+          <div class="data-display">
+            Add:
+            <a href="#" data-display="cc">CC</a>
+            <a href="#" data-display="bcc">BCC</a>
+            <a href="#" data-display="replyTo">Reply-To</a>
+          </div>
         </div>
       </div>
-    </div>
+    {{/unless}}
+    
+    {{#unless options.hideCC}}
+      <div class="form-group clearfix hidden">
+        <div class="col-sm-4 control-label">
+          <label for="cc">CC</label>
+        </div>
+        <div class="col-sm-8">
+          <input type="text" name="cc" class="form-control" id="cc" placeholder="Separate multiple email addresses with commas" />
+        </div>
+      </div>
+    {{/unless}}
 
-    <div class="form-group clearfix hidden">
-      <div class="col-sm-4 control-label">
-        <label for="cc">CC</label>
+    {{#unless options.hideBCC}}
+      <div class="form-group clearfix hidden">
+        <div class="col-sm-4 control-label">
+          <label for="bcc">BCC</label>
+        </div>
+        <div class="col-sm-8">
+          <input type="text" name="bcc" class="form-control" id="bcc" placeholder="Separate multiple email addresses with commas" />
+        </div>
       </div>
-      <div class="col-sm-8">
-        <input type="text" name="cc" class="form-control" id="cc" placeholder="Separate multiple email addresses with commas" />
-      </div>
-    </div>
+    {{/unless}}
 
-    <div class="form-group clearfix hidden">
-      <div class="col-sm-4 control-label">
-        <label for="bcc">BCC</label>
+    {{#unless options.hideReplyTo}}
+      <div class="form-group clearfix hidden">
+        <div class="col-sm-4 control-label">
+          <label for="replyTo">Reply-To</label>
+        </div>
+        <div class="col-sm-8">
+          <input type="text" name="replyTo" class="form-control" id="replyTo" placeholder="One email address only" />
+        </div>
       </div>
-      <div class="col-sm-8">
-        <input type="text" name="bcc" class="form-control" id="bcc" placeholder="Separate multiple email addresses with commas" />
+    {{/unless}}
+    
+    {{#unless options.hideSubject}}
+      <div class="form-group clearfix">
+        <div class="col-sm-4 control-label">
+          <label for="subject">Subject</label>
+        </div>
+        <div class="col-sm-8">
+          <input type="text" name="subject" class="form-control" id="subject" placeholder="Subject of the email" value="{{ subject }}" required />
+        </div>
       </div>
-    </div>
+    {{/unless}}
 
-    <div class="form-group clearfix hidden">
-      <div class="col-sm-4 control-label">
-        <label for="replyTo">Reply-To</label>
+    {{#unless options.hideBody}}
+      <div class="form-group clearfix">
+        <div class="col-sm-4 control-label">
+          <label for="html">Body</label>
+        </div>
+        <div class="col-sm-8">
+          <textarea name="html" class="form-control" id="html">{{ html }}</textarea>
+        </div>
+        {{#if options.usage}}
+        <div class="col-sm-12 usage">
+          <h2><small>How to use</small></h2>
+          <p>Use the following to:</p>
+          <ul>
+            {{#each options.usage}}
+              <li><code>\{{ {{@key}} }}</code> - {{{ this }}}</li>
+            {{/each}}
+          </ul>
+        </div>
+        {{/if}}
       </div>
-      <div class="col-sm-8">
-        <input type="text" name="replyTo" class="form-control" id="replyTo" placeholder="One email address only" />
-      </div>
-    </div>
-
-    <div class="form-group clearfix">
-      <div class="col-sm-4 control-label">
-        <label for="subject">Subject</label>
-      </div>
-      <div class="col-sm-8">
-        <input type="text" name="subject" class="form-control" id="subject" placeholder="Subject of the email" value="{{ subject }}" required />
-      </div>
-    </div>
-
-    <div class="form-group clearfix">
-      <div class="col-sm-4 control-label">
-        <label for="html">Body</label>
-      </div>
-      <div class="col-sm-8">
-        <textarea name="html" class="form-control" id="html">{{ html }}</textarea>
-      </div>
-      <div class="col-sm-12 usage">
-        
-      </div>
-    </div>
+    {{/unless}}
   </form>
 </div>
