@@ -17,8 +17,7 @@
     ],
     "assets": [
       "css/interface.css",
-      "js/interface.js",
-      "js/interface.templates.js"
+      "js/interface.js"
     ]
   },
   "build": {
