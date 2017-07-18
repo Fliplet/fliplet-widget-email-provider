@@ -121,7 +121,9 @@ Fliplet().then(function () {
     ].join(' '),
     setup: function (ed) {
       ed.on('keyup paste', function(e) {
-        data.html = ed.getContent();
+        data.html = ed.getContent()
+          .replace(/&lt;/g, '<')
+          .replace(/&gt;/g, '>');
       });
     }
   });
