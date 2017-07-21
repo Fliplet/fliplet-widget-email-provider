@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div id="widget-form-container">
   <form class="form-horizontal">
     <header>
       <p>Configure your email actions</p>
@@ -74,18 +74,18 @@
         <div class="col-sm-8">
           <textarea name="html" class="form-control" id="html">{{ html }}</textarea>
         </div>
-        {{#if options.usage}}
-        <div class="col-sm-12 usage">
-          <h2><small>How to use</small></h2>
-          <p>Use the following to:</p>
-          <ul>
-            {{#each options.usage}}
-              <li><code>\{{ {{@key}} }}</code> - {{{ this }}}</li>
-            {{/each}}
-          </ul>
-        </div>
-        {{/if}}
       </div>
+      {{#if options.usage}}
+      <div class="col-sm-12 usage">
+        <h2><small>How to use</small></h2>
+        <p>Use the following to:</p>
+        <ul>
+          {{#each options.usage}}
+            <li><code>\{{ {{@key}} }}</code> - {{{ this }}}</li>
+          {{/each}}
+        </ul>
+      </div>
+      {{/if}}
     {{/unless}}
   </form>
 </div>
