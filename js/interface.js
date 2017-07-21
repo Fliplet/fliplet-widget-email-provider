@@ -1,5 +1,9 @@
 Fliplet().then(function () {
   function multiple(type, value) {
+    if (!type || !value) {
+      return;
+    }
+
     return _.compact(value.split(',').map(function (val) {
       var pieces = val.trim().match(/(.+)<(.+)>/);
       if (!pieces) {
@@ -79,8 +83,15 @@ Fliplet().then(function () {
     data.subject = $('[name="subject"]').val();
 
     multipleFields.forEach(function (name) {
-      multiple(name, $('[name="' + name + '"]').val()).forEach(function (email) {
-        data.to.push(email);
+      var value = $('[name="' + name + '"]').val();
+      if (!value) {
+        return;
+      }
+
+      multiple(name, value).forEach(function (email) {
+        if (email) {
+          data.to.push(email);
+        }
       });
     });
 
