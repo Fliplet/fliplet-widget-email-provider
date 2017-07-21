@@ -1,3 +1,17 @@
+.form-horizontal {
+  padding: 15px;
+}
+
+.tinymce-area {
+  margin-left: -30px;
+  margin-right: -30px;
+}
+
+.tinymce-area .col-sm-8 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
 [data-display] {
   text-decoration: underline;
   font-size: 12px;
