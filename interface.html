@@ -14,9 +14,9 @@
           <input type="text" name="to" class="form-control" id="to" placeholder="Separate multiple email addresses with commas" required />
           <div class="data-display">
             Add:
-            <a href="#" data-display="cc">CC</a>
-            <a href="#" data-display="bcc">BCC</a>
-            <a href="#" data-display="replyTo">Reply-To</a>
+            {{#unless options.hideCC}}<a href="#" data-display="cc">CC</a>{{/unless}}
+            {{#unless options.hideBCC}}<a href="#" data-display="bcc">BCC</a>{{/unless}}
+            {{#unless options.hideReplyTo}}<a href="#" data-display="replyTo">Reply-To</a>{{/unless}}
           </div>
         </div>
       </div>
