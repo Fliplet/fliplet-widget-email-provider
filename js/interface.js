@@ -131,7 +131,7 @@ Fliplet().then(function () {
       'blockquote subscript superscript | table hr | removeformat | code'
     ].join(' '),
     setup: function (ed) {
-      ed.on('keyup paste', function(e) {
+      ed.on('change keyup paste', function(e) {
         data.html = ed.getContent();
       });
     }
