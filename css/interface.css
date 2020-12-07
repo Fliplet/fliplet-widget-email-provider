@@ -17,3 +17,10 @@
   font-size: 12px;
   font-weight: 600;
 }
+
+.help-icon {
+  font-size: 16px;
+  margin-left: 8px;
+  color: #333;
+  opacity: 0.5;
+}
