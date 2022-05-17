@@ -100,7 +100,9 @@ Fliplet().then(function() {
 
     var replyTo = $('[name="replyTo"]').val();
 
-    data.headers['Reply-To'] = replyTo ? replyTo : 'no-reply@fliplet.com';
+    if (replyTo) {
+      data.headers['Reply-To'] = replyTo;
+    }
 
     // Don't pass back the options
     delete data.options;
