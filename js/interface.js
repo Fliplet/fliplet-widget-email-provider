@@ -1,11 +1,12 @@
-Fliplet().then(function () {
+Fliplet().then(function() {
   function multiple(type, value) {
     if (!type || !value) {
       return;
     }
 
-    return _.compact(value.split(',').map(function (val) {
+    return _.compact(value.split(',').map(function(val) {
       var pieces = val.trim().match(/(.+)<(.+)>/);
+
       if (!pieces) {
         pieces = [null, val, val];
       }
@@ -45,10 +46,11 @@ Fliplet().then(function () {
     $el.closest('.form-group').removeClass('hidden');
   }
 
-  multipleFields.forEach(function (name) {
+  multipleFields.forEach(function(name) {
     var value = _.filter(data.to, { type: name });
+
     if (Array.isArray(value) && value.length) {
-      showGroup($('[name="' + name + '"]').val(value.map(function (val) {
+      showGroup($('[name="' + name + '"]').val(value.map(function(val) {
         if (val.name && val.name !== val.email) {
           return val.name + ' <' + val.email + '>';
         }
@@ -63,11 +65,11 @@ Fliplet().then(function () {
   checkMultipleFieldToggles();
 
   if (data.headers && data.headers['Reply-To']) {
-   showGroup($('[name="replyTo"]').val(data.headers['Reply-To']));
-   $('[data-display="replyTo"]').hide();
+    showGroup($('[name="replyTo"]').val(data.headers['Reply-To']));
+    $('[data-display="replyTo"]').hide();
   }
 
-  $('[data-display]').click(function (event) {
+  $('[data-display]').click(function(event) {
     event.preventDefault();
     showGroup($('input[name="' + $(this).data('display') + '"]'));
     $(this).remove();
@@ -75,20 +77,21 @@ Fliplet().then(function () {
     Fliplet.Widget.autosize();
   });
 
-  $('form').submit(function (event) {
+  $('form').submit(function(event) {
     event.preventDefault();
 
     data.headers = data.headers || {};
     data.to = [];
     data.subject = $('[name="subject"]').val();
 
-    multipleFields.forEach(function (name) {
+    multipleFields.forEach(function(name) {
       var value = $('[name="' + name + '"]').val();
+
       if (!value) {
         return;
       }
 
-      multiple(name, value).forEach(function (email) {
+      multiple(name, value).forEach(function(email) {
         if (email) {
           data.to.push(email);
         }
@@ -96,6 +99,7 @@ Fliplet().then(function () {
     });
 
     var replyTo = $('[name="replyTo"]').val();
+
     if (replyTo) {
       data.headers['Reply-To'] = replyTo;
     }
@@ -103,14 +107,14 @@ Fliplet().then(function () {
     // Don't pass back the options
     delete data.options;
 
-    Fliplet.Widget.save(data).then(function () {
+    Fliplet.Widget.save(data).then(function() {
       Fliplet.Widget.complete();
     });
   });
 
   $(window).on('resize', Fliplet.Widget.autosize);
 
-  Fliplet.Widget.onSaveRequest(function () {
+  Fliplet.Widget.onSaveRequest(function() {
     $('form').submit();
   });
 
@@ -130,8 +134,8 @@ Fliplet().then(function () {
     menubar: false,
     statusbar: false,
     min_height: 300,
-    setup: function (ed) {
-      ed.on('change keyup paste', function(e) {
+    setup: function(ed) {
+      ed.on('change keyup paste', function() {
         data.html = ed.getContent();
       });
     }

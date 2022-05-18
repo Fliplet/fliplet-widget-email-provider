@@ -1,0 +1,7 @@
+{
+  "extends": "fliplet",
+  "root": true,
+  "rules": {
+    "no-eval": 0
+  }
+}
