@@ -102,6 +102,8 @@ Fliplet().then(function() {
 
     if (replyTo) {
       data.headers['Reply-To'] = replyTo;
+    } else {
+      delete data.headers['Reply-To'];
     }
 
     // Don't pass back the options
