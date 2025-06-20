@@ -122,17 +122,14 @@ Fliplet().then(function() {
 
   $textarea.tinymce({
     plugins: [
-      'lists advlist image charmap hr code',
-      'searchreplace wordcount insertdatetime table textcolor colorpicker'
-    ],
-    toolbar: [
-      'formatselect |',
-      'bold italic underline strikethrough |',
-      'forecolor backcolor |',
-      'alignleft aligncenter alignright alignjustify | bullist numlist outdent indent |',
-      'blockquote subscript superscript | table insertdatetime charmap hr |',
-      'removeformat | code'
+      'advlist autolink lists link directionality',
+      'autoresize fullscreen code'
     ].join(' '),
+    toolbar: [
+      'bold italic underline',
+      'alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',
+      'ltr rtl | link | removeformat code fullscreen'
+    ].join(' | '),
     menubar: false,
     statusbar: false,
     min_height: 300,
