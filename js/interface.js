@@ -4,7 +4,7 @@ Fliplet().then(function() {
       return;
     }
 
-    return _.compact(value.split(',').map(function(val) {
+    return Fliplet.Utils.compact(value.split(',').map(function(val) {
       var pieces = val.trim().match(/(.+)<(.+)>/);
 
       if (!pieces) {
@@ -39,7 +39,7 @@ Fliplet().then(function() {
   }
 
   var multipleFields = ['to', 'cc', 'bcc'];
-  var data = _.omit(Fliplet.Widget.getData(), ['id', 'uuid']);
+  var data = Fliplet.Utils.omit(Fliplet.Widget.getData(), ['id', 'uuid']);
   var $textarea = $('textarea');
 
   function showGroup($el) {
@@ -47,7 +47,7 @@ Fliplet().then(function() {
   }
 
   multipleFields.forEach(function(name) {
-    var value = _.filter(data.to, { type: name });
+    var value = Fliplet.Utils.filter(data.to, { type: name });
 
     if (Array.isArray(value) && value.length) {
       showGroup($('[name="' + name + '"]').val(value.map(function(val) {
