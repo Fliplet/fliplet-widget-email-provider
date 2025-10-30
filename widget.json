@@ -10,7 +10,6 @@
   "interface": {
     "dependencies": [
       "handlebars",
-      "lodash",
       "fliplet-core",
       "fliplet-utils",
       "fliplet-studio-ui",
